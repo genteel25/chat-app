@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",   
+  "main": "index.js",
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js"
@@ -17,6 +17,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.10.1"
+    "mongoose": "^8.10.1",
+    "resend": "^6.0.3"
   }
 }

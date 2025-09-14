@@ -1,11 +1,9 @@
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-
-dotenv.config()
+import { ENV } from './env.js';
 
 const connectDB = async () => {
     try {
-        const {MONGODB_URL} = process.env;
+        const {MONGODB_URL} = ENV;
         if(!MONGODB_URL) {
             throw new Error("MONGODB_URL is not defined")
         }
