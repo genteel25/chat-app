@@ -1,7 +1,8 @@
 import User from '../models/User.js'
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 import { generateToken } from '../lib/utils.js';
+import { sendWelcomeEmail } from '../emails/emailHandlers.js';
+import { ENV } from '../lib/env.js';
 
 export const signup =async (req, res) => {
     const {fullName, email, password} = req.body;
@@ -39,7 +40,7 @@ export const signup =async (req, res) => {
         if(newUser) {
           const savedUser =  await newUser.save();
             const token = generateToken(savedUser._id, res)       
-            return res.status(201).json({
+             res.status(201).json({
                 _id: savedUser._id, 
                 fullName: savedUser.fullName, 
                 email: savedUser.email, 
@@ -47,6 +48,11 @@ export const signup =async (req, res) => {
                 token
             })
             //Send a welcome email to user
+            try{
+                await sendWelcomeEmail(savedUser.email, savedUser.fullName, ENV.CLIENT_URL)
+            } catch(e) {
+                console.log("Error in sending welcome email", e);
+            }
         }else{
             return res.status(400).json({message: "User not created"})
         }
