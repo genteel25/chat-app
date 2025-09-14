@@ -23,7 +23,11 @@ if(process.env.NODE_ENV === 'production') {
     })
 }
 
-app.listen(process.env.PORT || 3000, () => {    
-    console.log(`Server is running on port ${process.env.PORT || 3000}`)
-    connectDB()
+connectDB().then(() => {
+    app.listen(process.env.PORT || 3000, () => {    
+        console.log(`Server is running on port ${process.env.PORT || 3000}`)
+    })
+}).catch((err) => {
+    console.log("Failed to connext to MongoDB", err);
+    process.exit(1)
 })
