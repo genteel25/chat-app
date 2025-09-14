@@ -33,7 +33,6 @@ export const signup =async (req, res) => {
             password: hashedPassword
         })
         if(newUser) {
-            // const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET, {expiresIn: '1d'})
         const token =    generateToken(newUser._id, res)
             await newUser.save();
             return res.status(201).json({
@@ -43,6 +42,7 @@ export const signup =async (req, res) => {
                 profilePic: newUser.profilePic,
                 token
             })
+            //Send a welcome email to user
         }else{
             return res.status(400).json({message: "User not created"})
         }
