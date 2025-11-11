@@ -11,6 +11,7 @@ const app = express();
 const __dirname = path.resolve();
 dotenv.config() 
 
+
 app.use(express.json()) // req.body
 app.use(cookieParser())
 app.use("/api/auth", authRoutes)
