@@ -16,10 +16,15 @@ const io = new Server(server, {
 // Apply middleware to our socket
 io.use(socketAuthMiddleware);
 
+// we'll use this to check if user is online or not
+function getReceiverSocketId(userId) {
+    return userSocketMap[userId];
+}
+
 const userSocketMap = {}; //{userId: socketId}
 
 io.on("connection", (socket) => {
-    console.log("a user connected", socket.user.fullName);
+    // console.log("a user connected", socket.user.fullName);
     userSocketMap[socket.userId] = socket.id;
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
     socket.on("disconnect", () => {
@@ -29,4 +34,4 @@ io.on("connection", (socket) => {
     });
 });
 
-export { io, app, server };
+export { io, app, server, getReceiverSocketId };
