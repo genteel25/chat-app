@@ -15,6 +15,8 @@ function ChatsList() {
   if (isUsersLoading) return <UsersLoadingSkeleton />;
   if (chats.length === 0) return <NoChatsFound />;
 
+  console.log(chats)
+
   return (
     <>
       {chats.map((chat) => (
@@ -29,7 +31,7 @@ function ChatsList() {
                 <img src={chat.profilePic || "/avatar.png"} alt={chat.fullName} />
               </div>
             </div>
-            <h4 className="text-slate-200 font-medium truncate">{chat.fullName}</h4>
+            <h4 className="text-slate-200 font-medium truncate line-clamp-2">{chat.fullName}</h4>
           </div>
         </div>
       ))}

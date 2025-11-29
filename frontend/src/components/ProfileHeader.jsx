@@ -37,7 +37,7 @@ function ProfileHeader() {
               onClick={() => fileInputRef.current.click()}
             >
               <img
-                src={selectedImg || authUser.profilePic || "/avatar.png"}
+                src={selectedImg || authUser.profilePicture || "/avatar.png"}
                 alt="User image"
                 className="size-full object-cover"
               />
@@ -57,7 +57,7 @@ function ProfileHeader() {
 
           {/* USERNAME & ONLINE TEXT */}
           <div>
-            <h3 className="text-slate-200 font-medium text-base max-w-[180px] truncate">
+            <h3 className="text-slate-200 font-medium text-base max-w-[180px]  line-clamp-1">
               {authUser.fullName}
             </h3>
 
